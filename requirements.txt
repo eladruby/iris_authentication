@@ -1,5 +1,11 @@
-tensorflow==2.15.0
+tensorflow
 opencv-python
 numpy
 matplotlib
 nvidia-ml-py3
+Pillow
+streamlit
+requests
+opencv-python
+tensorflow.keras
+streamlit

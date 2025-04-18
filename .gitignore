@@ -12,7 +12,6 @@ env/
 # Model weights / large files
 *.ckpt
 *.keras
-models/
 
 # Data
 *.zip
