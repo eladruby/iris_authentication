@@ -10,8 +10,6 @@ env/
 .DS_Store
 
 # Model weights / large files
-*.h5
-*.weights.h5
 *.ckpt
 *.keras
 models/
