@@ -1,0 +1,31 @@
+# Virtual environments
+venv/
+env/
+.tfenv/
+
+# VS Code settings
+.vscode/
+
+# Mac & system files
+.DS_Store
+
+# Model weights / large files
+*.h5
+*.weights.h5
+*.ckpt
+*.keras
+models/
+
+# Data
+*.zip
+*.jpg
+*.png
+*.bmp
+*.tiff
+data/
+
+# Logs
+*.log
+
+# Environment configs
+.env
