@@ -10,7 +10,7 @@ import requests
 import os
 
 
-# מודל טריפלט
+#מודל טריפלט
 class TripletLoss:
     def __init__(self):
         self.inp = tf.keras.Input(shape=(None, None, 3))
@@ -27,17 +27,7 @@ class TripletLoss:
         self.out = tf.keras.layers.GlobalMaxPooling2D()(out_conv)
         return Model(inputs=vgg16_fe.inputs, outputs=self.out, name='embedding')
 
-# הורדת משקולות מהאינטרנט
-def download_weights(url):
-    import tempfile
-    response = requests.get(url)
-    response.raise_for_status()
-    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".h5")
-    tmp.write(response.content)
-    tmp.close()
-    return tmp.name
-
-# פונקציית עיבוד תמונה
+#פונקציית עיבוד תמונה
 def preprocess(uploaded_file):
     image = Image.open(uploaded_file).convert("RGB")
     w_target = 400
@@ -53,23 +43,25 @@ def preprocess(uploaded_file):
 model_copy = TripletLoss()
 embedding = model_copy.embedding()
 
-# חובה: הרצת דוגמה לבניית המודל
+#בניית מודל והכנסת משקולות
 embedding.build((None, 75, 400, 3))
 
 weights_path = os.path.join(os.path.dirname(__file__), "..", "models", "final.weights.h5")
 embedding.load_weights(weights_path)
 
-st.title("🔒 Iris Authentication System")
+st.title("Iris Authentication System")
 
-img_file1 = st.file_uploader("Upload Image 1 jpg file only*", type=["jpg"])
-img_file2 = st.file_uploader("Upload Image 2 jpg file only*", type=["jpg"])
+img_file1 = st.file_uploader("Upload image 1 jpg file only*", type=["jpg"])
+img_file2 = st.file_uploader("Upload image 2 jpg file only*", type=["jpg"])
 
+#בדיקה אם הועלו שתי תמונות
 if img_file1 and img_file2:
     img1 = preprocess(img_file1)
     img2 = preprocess(img_file2)
 
+    #בדיקה אם נמצאה קשתית בשתי התמונות
     if img1 is None or img2 is None:
-        st.error("❌ Could not process one or both images.")
+        st.error("Iris is not recognized")
     else:
         # תצוגת התמונות
         st.image([img1.squeeze() / 255.0, img2.squeeze() / 255.0],
@@ -80,9 +72,9 @@ if img_file1 and img_file2:
         embedding2 = embedding.predict(img2)
         distance = norm(embedding1 - embedding2)
 
-        st.write("🔍 **Distance between embeddings:**", float(distance))
+        st.write("**Distance between embeddings:**", float(distance))
         threshold = 1.49
         if distance < threshold:
-            st.success("✅ Authentication Successful")
+            st.success("Authentication Successful")
         else:
-            st.warning("❌ Authentication Failed")
+            st.warning("Authentication Failed")

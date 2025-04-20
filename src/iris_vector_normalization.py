@@ -12,14 +12,11 @@ def IrisVectorNormalization(img, verbose=False):
     if isinstance(img, Image.Image):
         img = np.array(img.convert("RGB"))
 
-    # גרסה מקורית של התמונה לעבודה
     original = img.copy()
 
-    # הפיכת התמונה לגווני אפור + סינון
     filter = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     filter = cv2.medianBlur(filter, 21)
 
-    # חיפוש עיגול איריס
     detected_circles = cv2.HoughCircles(
         filter, cv2.HOUGH_GRADIENT, dp=3, minDist=20,
         param1=50, param2=20, minRadius=60, maxRadius=105
@@ -29,7 +26,6 @@ def IrisVectorNormalization(img, verbose=False):
         return None
     A, B, R = np.uint16(np.around(detected_circles))[0, 0]
 
-    # חיפוש עיגול אישון
     filter = cv2.medianBlur(filter, 21)
     detected_circles = cv2.HoughCircles(
     filter, cv2.HOUGH_GRADIENT, 1, 50, param1=80,
