@@ -16,7 +16,6 @@ def IrisVectorNormalization(img, verbose=False):
 
     filter = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     filter = cv2.medianBlur(filter, 21)
-
     detected_circles = cv2.HoughCircles(
         filter, cv2.HOUGH_GRADIENT, dp=3, minDist=20,
         param1=50, param2=20, minRadius=60, maxRadius=105
