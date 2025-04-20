@@ -1,4 +1,3 @@
-# ייבוא ספריות
 from iris_vector_normalization import IrisVectorNormalization
 from tensorflow.keras import Model
 from numpy.linalg import norm

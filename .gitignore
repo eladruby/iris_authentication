@@ -13,14 +13,6 @@ env/
 *.ckpt
 *.keras
 
-# Data
-*.zip
-*.jpg
-*.png
-*.bmp
-*.tiff
-data/
-
 # Logs
 *.log
 
