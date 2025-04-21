@@ -83,7 +83,7 @@ def preprocess(uploaded_file, segmentation, model):
     #ואז מחלקים את כל הערכים ב255 כדי שהתמונה תהיה עם ערכים הנעים בין 0-1
     #לא יציג ערכים גבוהים מדי כמו 0-255 שיחזירו לנו שגיאה Streamlitעושים זאת בכדי ש
     #בגלל שהוא לא עובד עם ערכים גבוהים מדי
-    img = np.array(img).astype("float32") /255
+    img = np.array(img).astype("float32")
 
     #כי ככה הגדרנו את הקלט של המודל בבנייתו Batch בכדי שנוכל להכניס את התמונה למודל נצטרך להוסיף ממד
     img = np.expand_dims(img, axis=0)
@@ -153,7 +153,7 @@ if img_file1 and img_file2:
         #st.image - מציג את התמונות
         #caption - נותן שם לכל תמונה
         #width - קובע את הרוחב של התמונה
-        st.image([img1.squeeze(), img2.squeeze()],
+        st.image([img1.squeeze() / 255, img2.squeeze() / 255],
                  caption=["Image 1", "Image 2"], width=150)
 
         #הכנסת התמונות למודל בכדי להוציא את ווקטור התכונות שלהן
@@ -167,7 +167,7 @@ if img_file1 and img_file2:
         st.write("🔍 **Distance between embeddings:**", distance)
         #קביעת הערך המקסימלי למרחק של שתי תמונות שנחשבות זהות כלומר כל מה שמעל נחשב לעיניים שונות
         #קבעתי את המרחק לפי ניסוי וטעייה
-        threshold = 1.0
+        threshold = 1.5
         #בדיקה אם מרחק התמונות קטן מהמרחק המקסימלי
         if distance < threshold:
             #אם כן אז הן זהות
@@ -175,3 +175,8 @@ if img_file1 and img_file2:
         else:
             #אם לא אז הן שונות
             st.warning("Authentication Failed")
+        print("Embedding 1:", embedding1)
+        print("Norm 1:", np.linalg.norm(embedding1))
+        print("Embedding 2:", embedding2)
+        print("Norm 2:", np.linalg.norm(embedding2))
+
