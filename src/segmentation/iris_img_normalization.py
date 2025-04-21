@@ -6,7 +6,7 @@ from PIL import Image
 
 #פונקציה לאיתור ונירמול קשתית העין המקבלת את הווקטור של התמונה
 #ומקבלת את מודל הסגמנטציה במידת הצורך, תלוי אם נרצה להשתמש בו או לא
-def IrisVectorNormalization(img, model=None):
+def IrisImgNormalization(img, model=None):
 
     #numpy על אותו פורמט ולכן נמיר את התמונה למערך של  cv2 אבל אי אפשר להשתמש בפעולות  ,PILכשאר אנחנו מייבאים את התמונה לממש, אנחנו משתמשים ב
     img = np.asarray(img)

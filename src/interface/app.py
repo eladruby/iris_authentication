@@ -13,7 +13,7 @@ import sys
 #מוסיף את האופציה לראות את כל התיקיות שנמצאות שתי נתיבים אחורה כלומר שתי תיקיות החוצה בכדי שנוכל לייבא פונקציות
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 #ייבוא פונקציית האיתור ונירמול הקשתית מקובץ נפרד
-from src.segmentation.iris_vector_normalization import IrisVectorNormalization
+from src.segmentation.iris_img_normalization import IrisImgNormalization
 
 
 #Triplet Lossיצירת מחלק במטרתה להכיל את הארכיטקטורה של מודל ה
@@ -70,10 +70,10 @@ def preprocess(uploaded_file, segmentation, model):
     #העברת התמונה בפונקציית האיתור ונירמול הקשתית
     #אם סומן שיש צורך בסגמנטציה אז יצורף מודל הסגמנטציה לפונקציה כך שהיא תדע להשתמש בו
     if segmentation:
-        img = IrisVectorNormalization(image_resized, model)
+        img = IrisImgNormalization(image_resized, model)
     else:
         #אם לא אז הפונקציה תפעל כרגיל ללא סגמנטציה
-        img = IrisVectorNormalization(image_resized)
+        img = IrisImgNormalization(image_resized)
     #None אם לא נמצא קשתית בתמונה אז נחזיר 
     if img is None:
         return None
