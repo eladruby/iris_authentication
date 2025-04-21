@@ -9,4 +9,4 @@ HOW TO RUN THE CODE ON A PYTHON 3.12 VIRTUAL ENVIREMENT
  - download libraries "pip install -r requirements.txt"
 
 HOW TO RUN INTERFACE:
- - Write in bash Terminal "streamlit run src/interface.py"
+ - Write in bash Terminal "streamlit run src/interface/app.py"
