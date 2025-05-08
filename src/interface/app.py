@@ -175,8 +175,4 @@ if img_file1 and img_file2:
         else:
             #אם לא אז הן שונות
             st.warning("Authentication Failed")
-        print("Embedding 1:", embedding1)
-        print("Norm 1:", np.linalg.norm(embedding1))
-        print("Embedding 2:", embedding2)
-        print("Norm 2:", np.linalg.norm(embedding2))
 
