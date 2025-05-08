@@ -164,7 +164,7 @@ if img_file1 and img_file2:
         distance = norm(embedding1 - embedding2)
 
         #כתיבת המרחק בין שתי התמונות
-        st.write("🔍 **Distance between embeddings:**", distance)
+        st.write("**Distance between embeddings:**", distance)
         #קביעת הערך המקסימלי למרחק של שתי תמונות שנחשבות זהות כלומר כל מה שמעל נחשב לעיניים שונות
         #קבעתי את המרחק לפי ניסוי וטעייה
         threshold = 1.5

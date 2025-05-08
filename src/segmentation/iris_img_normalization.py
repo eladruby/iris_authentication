@@ -156,7 +156,6 @@ def IrisImgNormalization(img, model=None):
         #.predict היא פונקציית הפעלת המודל
         #[0] כדי להוציא את התמונה מתוך הבאטצ' שלה
         pred_mask = model.predict(test_img)[0]
-        print("pred_mask.shape", pred_mask.shape)
         # 1עכשיו מכיוון שהמסיכה מגיעה בשחור לבן כלומר עם ממד שלישי השווה ל
         # 1אז נרצה להסיר אותו בעזרת פונקציה שמסירה כל ממד השווה ל
         pred_mask = np.squeeze(pred_mask)
@@ -323,7 +322,7 @@ def IrisImgNormalization(img, model=None):
         #אם לא נמצא עיגול, לא נרצה שהקוד ייקרוס אלה יחזיר שערך שלילי והודעת שגיאה
         if detected_circles is None:
             print("Breaked, Did not find Pupil")
-            return False
+            return None
 
         #אם כן מצאנו עיגולים אז אנחנו רוצים להמיר את מטריצת העיגולים למספרים שלמים ולבחור את העיגול הראשון שנמצא כי לרוב הוא הכי מדויק
         a, b, r = np.uint16(np.around(detected_circles))[0, 0]
