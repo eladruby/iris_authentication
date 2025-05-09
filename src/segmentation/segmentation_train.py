@@ -2,7 +2,6 @@
 import os
 from preprocessing import load_data # type: ignore
 from unet_model import build_unet # type: ignore
-import tensorflow as tf
 
 # הגדרת מיקום נתיב הדאטה-סט ומיקום שמירת קובץ המודל המאומן
 IMAGES_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "datasets", "UBIRIS_V2_Database", "iris")

@@ -105,7 +105,7 @@ embedding = model_copy.embedding()
 embedding.build((75, 400, 3))
 
 #הגדרת נתיב קוסץ המשקולות אותו נטען
-weights_path = os.path.join(os.path.dirname(__file__), "..", "..", "weights", "final.weights.h5")
+weights_path = os.path.join(os.path.dirname(__file__), "..", "..", "weights", "triplet_loss.weights.h5")
 #טעינת המקט של המשקולות המאומנות על המודל
 embedding.load_weights(weights_path)
 

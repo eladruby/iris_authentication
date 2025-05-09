@@ -11,7 +11,7 @@ TRIPLETS = 50
 LEARNING_RATE = 0.0001
 MARGIN = 0.5
 
-DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "dataset")
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "datasets", "IITT_Database")
 
 #__init__  הפעלת הפונקציה שבניתי במחלקה לייבוא ונירמול הדאטה-סט
 #אותה פונקציית בניה כוללת כמעט את כל הפונקציות שכתבתי
