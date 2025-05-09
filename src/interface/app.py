@@ -1,5 +1,4 @@
 #ייבוא ספריות
-import cv2
 from tensorflow.keras import Model # type: ignore
 from numpy.linalg import norm
 import tensorflow as tf
