@@ -166,7 +166,7 @@ if img_file1 and img_file2:
         st.write("**Distance between embeddings:**", distance)
         #קביעת הערך המקסימלי למרחק של שתי תמונות שנחשבות זהות כלומר כל מה שמעל נחשב לעיניים שונות
         #קבעתי את המרחק לפי ניסוי וטעייה
-        threshold = 1.5
+        threshold = 0.55
         #בדיקה אם מרחק התמונות קטן מהמרחק המקסימלי
         if distance < threshold:
             #אם כן אז הן זהות

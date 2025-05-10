@@ -4,12 +4,12 @@ from triplet_model import TripletLoss
 import tensorflow as tf
 import os
 
-EPOCHS = 2
+EPOCHS = 11
 BATCH_SIZE = 2
 #מספר השלישיות שנרצה ליצור (נראה זאת בהמשך)
-TRIPLETS = 50
+TRIPLETS = 700
 LEARNING_RATE = 0.0001
-MARGIN = 0.5
+MARGIN = 0.7
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "datasets", "IITT_Database")
 
@@ -34,8 +34,6 @@ optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
 
 #הלולאה שכוללת את מהלכו של כל איפוק באימון
 for epoch in range(EPOCHS):
-    #הדפסת מספר האיפוק
-    print(f"Epoch {epoch+1}")
     #לולאה הלוקחת כל תמונה מהשלישיה ומעבירה אותו בתוך תוכן הלולאה
     for anchor, positive, negative in dataset:
         #tape נותנים לנו ,מגדירים אותו כמשתנה Tensorflowחישוב הגראדיאנט האוטומטי ש
