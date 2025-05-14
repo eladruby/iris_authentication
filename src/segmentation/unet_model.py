@@ -52,7 +52,9 @@ def build_unet(input_shape=(128, 128, 3)):
     #dropout הפונקציה מקבלת את רמת החוזק של הדרופאוט
     def up_block(x, skip, filters, dropout):
         #המגדילה את ממדי התמונה, בדיוק ההפך משכבת קונבולוציה רגילה Unsampling שכבת 
-        x = tf.keras.layers.Conv2DTranspose(filters, 2, strides=2, padding='same')(x)
+        #kernel_initializer='he_uniform' מה שנותן תוצאות טובות יותר עם איתחול משקולות relu מאחר וכל המודל עובד עם 
+        #נבנה בהתחשבות באקטיבציית רלו כך שהיא תשמור על מצב שבו פחות משקלים ימותו ופחות משקלים יתפוצצו
+        x = tf.keras.layers.Conv2DTranspose(filters, 2, strides=2, padding='same', kernel_initializer='he_uniform')(x)
         #פונקציה המחברת את הדאטה מהשכבה המקבילה בכדי ליצור מידע חדש עם הבנה מורחבת יחד עם השכבות הראשונות שעדיין לא עמוקות
         #x - השכבה הקודמת
         #skip - השכבה המקבילה
