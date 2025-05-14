@@ -9,14 +9,12 @@ def build_unet(input_shape=(128, 128, 3)):
     x = inputs
 
     #פטנקציה היוצרת שלוש שכבות בקצף בכדי להקל על כתיבת הקוד
-    def conv_block(x, filters, dropout):
+    def conv_block(x, filters):
         #שכבת קונבולוציה עם פילטרים בגודל 3 על 3
         #אקטיבציית רלו
         #padding='same' כך שהשכבה לא תקטין את התמונה
         #kernel_initializer='he_normal' כך שהמשקולות יתחילו באיזור האפס
         x = tf.keras.layers.Conv2D(filters, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x)
-        #Dropout שכבת 
-        x = tf.keras.layers.Dropout(dropout)(x)
         #עוד שכבת קונבולוציה זהה בגודל הפילטרים, האקטיבציה, שמירת ממדי התמונה ואתחולי המשקולות בדיוק כמו השכבה הראשונה
         x = tf.keras.layers.Conv2D(filters, 3, activation='relu', padding='same', kernel_initializer='he_normal')(x)
         #החזרת שלושת השכבות
@@ -49,8 +47,7 @@ def build_unet(input_shape=(128, 128, 3)):
     #skip הפונקציה מקבלת את מספר השכבה שאמורה להעביר אליה את הדאטה ההתחלתי 
     #x הפונקציה מקבלת את השכבה הקודמת
     #filters הפונקציה מקבלת את מספר הפילטרים
-    #dropout הפונקציה מקבלת את רמת החוזק של הדרופאוט
-    def up_block(x, skip, filters, dropout):
+    def up_block(x, skip, filters):
         #המגדילה את ממדי התמונה, בדיוק ההפך משכבת קונבולוציה רגילה Unsampling שכבת 
         #kernel_initializer='he_uniform' מה שנותן תוצאות טובות יותר עם איתחול משקולות relu מאחר וכל המודל עובד עם 
         #נבנה בהתחשבות באקטיבציית רלו כך שהיא תשמור על מצב שבו פחות משקלים ימותו ופחות משקלים יתפוצצו
@@ -60,7 +57,7 @@ def build_unet(input_shape=(128, 128, 3)):
         #skip - השכבה המקבילה
         x = tf.keras.layers.Concatenate()([x, skip])
         #פונקציה היוצרת את שלושת השכבות שיצרנו מקודם
-        x = conv_block(x, filters, dropout)
+        x = conv_block(x, filters)
         return x
 
     #עם 128 פילטרים ולאחר מכן פונקציית חיבור מידע ואז שוב שלוש שכבות Unsampling שימוש בפונקציה שהכנו ליצירת שכבת

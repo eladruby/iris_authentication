@@ -27,7 +27,10 @@ embedding_model = triplet_model.embedding()
 embedding_model(tf.random.normal([BATCH_SIZE, 75, 400, 3]))
 # על מנת שנוכל לגרום למודל להתאמן על כמה תמונות בכל איטרציה BATCH_SIZE הכנת הדאטה סט לקבוצות בגודל 
 #Triplet Loss נעשה פה שימוש בפונצייה ההופכת את הדאטה לשלישיות מאחר ואנחנו מתעסקים עם מודל
-dataset = dataset.get_triplets_batch().batch(BATCH_SIZE)
+#.shuffle - לוקח את התמונות ומערבב אותן
+# buffer_size - גודל החלק שמעורבב כל פעם
+# reshuffle_each_iteration - האם לערבב את התמונות בכל איטרציה
+dataset = dataset.get_triplets_batch().shuffle(buffer_size=TRIPLETS, reshuffle_each_iteration=True).batch(BATCH_SIZE)
 
 #הגדרת אופטימייזר אדם עם קצב הלמידה שהגדרנו בהתחלה
 optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
